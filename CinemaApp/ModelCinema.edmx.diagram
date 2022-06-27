@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba254e10bf5f4d4f9ec97b159b115227" Name="Diagram1" ZoomLevel="40" >
+        <EntityTypeShape EntityType="ModelCinema.ActerFilm" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="ModelCinema.Actors" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="ModelCinema.Countries" Width="1.5" PointX="6" PointY="1.5" />
+        <EntityTypeShape EntityType="ModelCinema.CountryFilm" Width="1.5" PointX="8.25" PointY="4.375" />
+        <EntityTypeShape EntityType="ModelCinema.Director" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="ModelCinema.DirectorFilm" Width="1.5" PointX="5.25" PointY="4.375" />
+        <EntityTypeShape EntityType="ModelCinema.Films" Width="1.5" PointX="3" PointY="6.5" />
+        <EntityTypeShape EntityType="ModelCinema.Genre" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="ModelCinema.GenreFilms" Width="1.5" PointX="5.25" PointY="10.375" />
+        <EntityTypeShape EntityType="ModelCinema.Hall" Width="1.5" PointX="6" PointY="14.125" />
+        <EntityTypeShape EntityType="ModelCinema.OccupiedPlace" Width="1.5" PointX="8.25" PointY="14.5" />
+        <EntityTypeShape EntityType="ModelCinema.Ratings" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="ModelCinema.Role" Width="1.5" PointX="6" PointY="18.5" />
+        <EntityTypeShape EntityType="ModelCinema.Sales" Width="1.5" PointX="10.5" PointY="3.25" />
+        <EntityTypeShape EntityType="ModelCinema.SaleTicket" Width="1.5" PointX="12.75" PointY="7.375" />
+        <EntityTypeShape EntityType="ModelCinema.Session" Width="1.5" PointX="8.25" PointY="7.125" />
+        <EntityTypeShape EntityType="ModelCinema.Statuses" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="ModelCinema.Tickets" Width="1.5" PointX="10.5" PointY="7" />
+        <EntityTypeShape EntityType="ModelCinema.Types" Width="1.5" PointX="3.75" PointY="14.5" />
+        <EntityTypeShape EntityType="ModelCinema.UserAccount" Width="1.5" PointX="8.25" PointY="18.125" />
+        <AssociationConnector Association="ModelCinema.FK_ActerFilm_Actors" />
+        <AssociationConnector Association="ModelCinema.FK_ActerFilm_Films" />
+        <AssociationConnector Association="ModelCinema.FK_CountryFilm_Countries" />
+        <AssociationConnector Association="ModelCinema.FK_CountryFilm_Films" />
+        <AssociationConnector Association="ModelCinema.FK_DirectorFilm_Director" />
+        <AssociationConnector Association="ModelCinema.FK_DirectorFilm_Films" />
+        <AssociationConnector Association="ModelCinema.FK_Films_Ratings" />
+        <AssociationConnector Association="ModelCinema.FK_Films_Statuses" />
+        <AssociationConnector Association="ModelCinema.FK_GenreFilms_Films" />
+        <AssociationConnector Association="ModelCinema.FK_Session_Films" />
+        <AssociationConnector Association="ModelCinema.FK_GenreFilms_Genre" />
+        <AssociationConnector Association="ModelCinema.FK_Hall_Types" />
+        <AssociationConnector Association="ModelCinema.FK_OccupiedPlace_Hall" />
+        <AssociationConnector Association="ModelCinema.FK_Session_Hall" />
+        <AssociationConnector Association="ModelCinema.FK_UserAccount_Role" />
+        <AssociationConnector Association="ModelCinema.FK_SaleTicket_Sales" />
+        <AssociationConnector Association="ModelCinema.FK_SaleTicket_Tickets" />
+        <AssociationConnector Association="ModelCinema.FK_Tickets_Session" />
+        <AssociationConnector Association="ModelCinema.FK_Tickets_UserAccount" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

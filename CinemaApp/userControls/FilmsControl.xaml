@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="CinemaApp.userControls.FilmsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CinemaApp.userControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1800">
+    <Grid>
+        <ListView x:Name="lvFilms" HorizontalContentAlignment="Stretch">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                               ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                               MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                               ItemHeight="{Binding (ListView.View).ItemHeigth, RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition materialDesign:BottomDashedLineAdorner.Brush="BurlyWood" Height="*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="../Resource/i.png" Margin="10" Stretch="Uniform" Width="100" HorizontalAlignment="Left"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+                            <TextBlock HorizontalAlignment="Center" FontSize="20" Margin="10" FontWeight="DemiBold" TextDecorations="UnderLine">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} ({1})">
+                                        <Binding Path="name"/>
+                                        <Binding Path="year"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding description}" TextWrapping="Wrap"/>
+                        <ListView x:Name="lvGenreFilm" ItemsSource="{Binding genreFilm}" Grid.Row="2" Grid.Column="1">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                               ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                               MinWidth="{Binding ItemWidth , RelativeSource={RelativeSource Self}}"
+                                               ItemHeight="{Binding (ListView.View).ItemHeigth, RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <materialDesign:Card Width="800" Height="600" Foreground="Black" Padding="50">
+            <StackPanel>
+                <TextBlock Text="Фильмы" FontSize="28" HorizontalAlignment="Center"
+                           Style="{StaticResource MaterialDesignCaptionTextBlock}" Foreground="CornflowerBlue"/>
+                <Separator Style="{StaticResource  MaterialDesignDarkSeparator}" Background="CornflowerBlue" />
+                <StackPanel Margin="20">
+                    
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+        <Grid>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
+                <TextBox x:Name="tbNameFilm" materialDesign:HintAssist.Hint="Названия" 
+                         Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Text="{Binding name}"/>
+                <TextBox x:Name="tbDescritionFilm" TextWrapping="Wrap" AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Visible" materialDesign:HintAssist.Hint="Описание"
+                         Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Text="{Binding Descritpion}"/>
+                <TextBox x:Name="tbYearFilm" materialDesign:HintAssist.Hint="Год выпуска"
+                         Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Text="{Binding Year}"/>
+                <TextBox x:Name="tbDurationFilm" materialDesign:HintAssist.Hint="Продолжительность"
+                         Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Text="{Binding Duration}"/>
+                <TextBox x:Name="tbPriceFilm" materialDesign:HintAssist.Hint="Цена"
+                         Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Text="{Binding Price}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <GroupBox Header="Возрастное ограничение"
+                          Style="{StaticResource MaterialDesignHeaderedContentControl}"
+                          Margin="10" Padding="10">
+                    <ListBox Name="lbRatinf">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="rating" Tag="{Binding}" Content="{Binding name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+                <ComboBox x:Name="cbStatusFilm" materialDesign:HintAssist.Hint="Статус"
+                          Style="{StaticResource MaterialDesignComboBox}" Margin="5" SelectedValue="{Binding Id}"/>
+            </StackPanel>
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="1">
+                <TabControl x:Name="detailTabControl" Style="{StaticResource MaterialDesignFilledTabControl}">
+                    <TabItem x:Name="genreFolmItem">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Film" Width="20" Height="20" Margin="0 0 5 0"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <ListView Name="LvGenre">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth),
+                                        RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                               ItemWidth="{Binding (ListView.View).ItemWidth,
+                                        RelativeSource={RelativeSource AncestorType=ListView}}"
+                                               MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                               ItemHeight="{Binding (ListView.View).ItemHeigth,
+                                        RelativeSource={RelativeSource AncestorType=ListView}}"
+                                               ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Tag="{Binding}" Content="{Binding name}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </TabItem>
+                    <TabItem x:Name="directorFilmItem">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="DirectionsWalk" Width="20" Height="20" Margin="1"/>
+                                <TextBlock  Text="Режисcёры" FontSize="14" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel  Grid.Column="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="cbDirector" materialDesign:HintAssist.Hint="Режиссёры" 
+                                          Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="cbDirector_SelectionChanged"/>
+                                <Button x:Name="btnAddDiractor" Content="+" FontSize="20" Width="50" Height="50" Margin="5"
+                                        Style="{StaticResource MaterialDesignFloatingActionSecondaryLightButton}" Cursor="Hand" Click="btnAddDiractor_Click"/>
+                                </StackPanel>
+                                <TextBlock x:Name="tbErrorDirector" Text="режиссер уже в списке" Foreground="Red" HorizontalAlignment="Center" Visibility="Hidden"/>
+                            </StackPanel>
+                            <ListView x:Name="lvDirectorFilm" Grid.Column="1">
+                                <ListView.ContextMenu>
+                                    <ContextMenu Style="{StaticResource MaterialDesignMenu}">
+                                        <MenuItem x:Name="cMenuDirector" Header="Удалить" Click="cMenuDirector_Click"
+                                                  Style="{StaticResource MaterialDesignMenuItem}"/>
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Tag="{Binding}" Text="{Binding name}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="actorFilmItem">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="People" Width="20" Height="20" Margin="0 0 5 0" />
+                                <TextBlock Text="Актеры" FontSize="14" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <ListView x:Name="lvActorFilm">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Tag="{Binding}" Text="{Binding name}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <ListView x:Name="lvNewActorFilm" MouseDown="lvNewActorFilm_MouseDown" Drop="lvNewActorFilm_Drop">
+                                <DataTemplate>
+                                    <TextBlock Tag="{Binding}" Text="{Binding name}"/>
+                                </DataTemplate>
+                                
+                            </ListView>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+            <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="btnSave" Content="Сохранить" Cursor="Hand"  Click="btnSave_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>
